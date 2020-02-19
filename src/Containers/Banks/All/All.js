@@ -141,10 +141,8 @@ class All extends Component {
         });
         document.getElementById("searchbar").value = "";
       })
-      .catch(function(thrown) {
-        if (axios.isCancel(thrown)) {
-        } else {
-        }
+      .catch((error) => {
+        console.log("Error " + error);
       })
       .finally(() => {
         this.setState({ isLoading: false });
