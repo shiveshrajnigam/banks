@@ -1,6 +1,6 @@
 {
   "homepage": "http://shiveshrajnigam.github.io/banks",
-  "name": "bank-details",
+  "name": "banks",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
