@@ -1,0 +1,33 @@
+.BankDetails {
+  padding: 15px 30px;
+}
+.BankDetails span {
+  font-weight: 100;
+  font-size: 0.8em;
+}
+.Back {
+  color: #56b596;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+.Back:hover {
+  color: #689e8d;
+}
+.Back > img {
+  height: 20px;
+  margin-right: 5px;
+    position: relative;
+    top: 2px;
+}
+.ImageContainer {
+  float: left;
+  position: relative;
+  top: 16px;
+}
+.ImageContainer img {
+  height: 15px;
+}
+.DetailsContainer {
+  float: left;
+  margin-left: 5px;
+}

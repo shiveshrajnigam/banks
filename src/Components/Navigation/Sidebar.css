@@ -1,0 +1,21 @@
+.Sidebar {
+  width: 180px;
+  background: #273135;
+  color: #fff;
+  display: inline-block;
+  height: 100vh;
+  float: left;
+}
+
+.Sidebar a {
+  color: #fff;
+  text-decoration: none;
+  padding: 15px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.ActiveLink {
+  background-color: #171d20;
+  border-left: 2px solid #56b596;
+}

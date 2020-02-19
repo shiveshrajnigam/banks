@@ -1,0 +1,19 @@
+.Dropdown {
+  all: unset;
+  padding-right: 15px;
+  background: url("https://www.charbase.com/images/glyph/9662") no-repeat right;
+  background-size: 16px;
+  margin: 0 15px;
+  color: rgb(84, 84, 84);
+  font-size: 0.9em;
+  height: 20px;
+}
+.Dropdown.BorderBottom {
+  border-bottom: 1px solid #ccc;
+}
+.Dropdown.NoBorder {
+  border: none;
+}
+.Dropdown:disabled {
+  opacity: 0.5;
+}

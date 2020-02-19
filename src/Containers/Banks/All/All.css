@@ -1,0 +1,25 @@
+.Table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  max-height: 30vh;
+  overflow: auto;
+}
+
+.Table td,
+th {
+  border-bottom: 1px solid #ccc;
+  text-align: left;
+  padding: 8px;
+  height: 35px;
+  font-size: 0.9em;
+}
+
+.Table tr {
+  font-weight: 100;
+  cursor: pointer;
+}
+
+.Table tr:nth-child(even) {
+  background-color: #eee;
+}

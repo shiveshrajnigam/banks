@@ -1,0 +1,23 @@
+.Searchbar {
+  all: unset;
+  padding-left: 15px;
+  border-bottom: 1px solid #ccc;
+  text-align: left;
+  margin: 0 15px;
+  min-width: 185px;
+  height: 24px;
+}
+.Searchbar:focus {
+  border-bottom: 1px solid #1a5fc7;
+}
+.Searchbar::placeholder {
+  font-size: 0.9em;
+}
+.SearchIcon {
+  height: 12px;
+  position: relative;
+  left: 25px;
+}
+.Searchbar:disabled {
+  opacity: 0.6;
+}
