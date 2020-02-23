@@ -47,7 +47,7 @@ const footer = props => {
       )}
     >
       <div style={{ marginRight: "30px" }}>
-        Row per pages:{" "}
+        Rows per page:{" "}
         <Dropdown
           typeId={"pageSize"}
           hideBorders={true}

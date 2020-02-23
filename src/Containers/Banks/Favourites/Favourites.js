@@ -59,10 +59,7 @@ class Favourites extends Component {
   };
 
   filterWithField = (filteredArray, value) => {
-    if (
-      this.state.selectedField.length &&
-      this.state.searchText.trim().length
-    ) {
+    if (this.state.selectedField.length && value.trim().length) {
       return filteredArray.filter(bank => {
         return (
           bank[this.state.selectedField]
@@ -100,7 +97,8 @@ class Favourites extends Component {
       this.setState({
         banks: this.state.allBanks[this.state.pageNumber].filter(bank =>
           this.state.selectedCity ? bank.city === this.state.selectedCity : true
-        )
+        ),
+        totalRecords: banks.length
       });
     }
   };
@@ -207,7 +205,7 @@ class Favourites extends Component {
           </span>
           <span>
             <Searchbar
-              onInput={this.searchTextHandler}
+              onInput={this.searchTextHandler.bind(this)}
               placeholder={placeholder}
               disable={this.state.selectedField ? false : true}
             />
@@ -246,7 +244,7 @@ class Favourites extends Component {
             <tbody>{this.state.banks.length ? banks : null}</tbody>
           </table>
           {!this.state.banks.length ? (
-            <StateContainer>No banks found!</StateContainer>
+            <StateContainer>No result found!</StateContainer>
           ) : null}
         </div>
         {this.state.banks.length ? (
