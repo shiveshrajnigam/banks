@@ -8,14 +8,22 @@ import Return from "../../../assets/icons/return.svg";
 const bankDetails = props => {
   const location = useLocation();
   const history = useHistory();
-  const bank = location.state.bank;
+  const bank = location.state
+    ? location.state.bank
+    : props.history.push({
+        pathname: "/banks"
+      });
 
   const back = () => {
     history.goBack();
   };
 
   const [state, setState] = useState({
-    imageSrc: location.state.isFavourite ? StarFilled : Star
+    imageSrc: location.state
+      ? location.state.isFavourite
+        ? StarFilled
+        : Star
+      : null
   });
 
   const updateFavourite = (event, bankDetails = bank) => {
@@ -32,7 +40,7 @@ const bankDetails = props => {
     event.stopPropagation();
   };
 
-  return (
+  const bankDetails = bank ? (
     <div className={classes.BankDetails}>
       <p onClick={back} className={classes.Back}>
         <img src={Return} alt="back_icon" />
@@ -64,7 +72,8 @@ const bankDetails = props => {
         </p>
       </div>
     </div>
-  );
+  ) : null;
+  return bank ? bankDetails : null;
 };
 
 export default bankDetails;
