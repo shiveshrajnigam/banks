@@ -17,7 +17,7 @@ This project is bootstrapped with [Create React App](https://github.com/facebook
 
 ## Demo
 
-Working demo: https://shiveshrajnigam.github.io/banks
+Working demo: https://shiveshrajnigam.github.io/bank-details
 
 ## Requirements
 
