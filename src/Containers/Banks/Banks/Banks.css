@@ -3,12 +3,13 @@
   position: sticky;
   top: 0;
   background: #fff;
+  z-index: 2;
 }
 .Table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
-  max-height: 30vh;
+  /* max-height: 30vh; */
   overflow: auto;
 }
 
@@ -65,5 +66,6 @@ th:first-child {
   td,
   tr {
     display: block;
+    text-align: center;
   }
 }
