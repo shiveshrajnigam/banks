@@ -3,6 +3,10 @@
   "name": "bank-details",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "8.17.0",
+    "npm": "6.13.7"
+  }
   "dependencies": {
     "autoprefixer": "7.1.6",
     "axios": "^0.19.2",
