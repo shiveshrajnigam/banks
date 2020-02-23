@@ -1,12 +1,14 @@
 {
-  "main.css": "static/css/main.badd92a0.css",
-  "main.css.map": "static/css/main.badd92a0.css.map",
-  "main.js": "static/js/main.e9fa3195.js",
-  "main.js.map": "static/js/main.e9fa3195.js.map",
+  "main.css": "static/css/main.268b8ded.css",
+  "main.css.map": "static/css/main.268b8ded.css.map",
+  "main.js": "static/js/main.72820778.js",
+  "main.js.map": "static/js/main.72820778.js.map",
+  "static/media/bank.svg": "static/media/bank.1b52df83.svg",
   "static/media/chevron-left.svg": "static/media/chevron-left.ef53cb85.svg",
   "static/media/chevron-right.svg": "static/media/chevron-right.c297095b.svg",
   "static/media/return.svg": "static/media/return.7562b929.svg",
   "static/media/search.svg": "static/media/search.90e9d461.svg",
-  "static/media/star.svg": "static/media/star.d072b762.svg",
-  "static/media/star_filled.svg": "static/media/star_filled.c0210b84.svg"
+  "static/media/star.svg": "static/media/star.a4379fd7.svg",
+  "static/media/star_filled.svg": "static/media/star_filled.7dc6e5d5.svg",
+  "static/media/star_grey.svg": "static/media/star_grey.c586f6c9.svg"
 }
