@@ -6,7 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import registerServiceWorker from "./registerServiceWorker";
 
 const app = (
-  <BrowserRouter basename="/app">
+  <BrowserRouter>
     <App />
   </BrowserRouter>
 );
