@@ -13,7 +13,7 @@ class Banks extends Component {
         <div className={classes.Layout}>
           <Switch>
             <Route path="/banks" exact component={AllBanks} />
-            <Route path="/banks/:id" exact component={BankDetails} />
+            <Route path="/banks/:id" component={BankDetails} />
             <Route path="/favourites" exact component={Favourites} />
             <Redirect from="/" to="/banks" />
           </Switch>
