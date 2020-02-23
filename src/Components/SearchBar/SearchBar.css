@@ -1,3 +1,7 @@
+.SearchbarContainer {
+  display: inline-block;
+  margin: 5px 0;
+}
 .Searchbar {
   all: unset;
   padding-left: 15px;
@@ -8,7 +12,7 @@
   height: 24px;
 }
 .Searchbar:focus {
-  border-bottom: 1px solid #1a5fc7;
+  border-bottom: 1px solid #56b596;
 }
 .Searchbar::placeholder {
   font-size: 0.9em;
@@ -18,6 +22,8 @@
   position: relative;
   left: 25px;
 }
-.Searchbar:disabled {
-  opacity: 0.6;
+.Searchbar:disabled,
+.Disable {
+  opacity: 0.4;
+  cursor: not-allowed;
 }

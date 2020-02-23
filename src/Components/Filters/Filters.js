@@ -11,27 +11,37 @@ const cities = [
   {
     id: 0,
     value: "MUMBAI",
-    name: "MUMBAI"
+    name: "Mumbai"
   },
   {
     id: 1,
     value: "BANGALORE",
-    name: "BANGALORE"
+    name: "Bangalore"
   },
   {
     id: 2,
     value: "DELHI",
-    name: "DELHI"
+    name: "Delhi"
   },
   {
     id: 3,
     value: "KANPUR",
-    name: "KANPUR"
+    name: "Kanpur"
   },
   {
     id: 4,
     value: "PUNE",
-    name: "PUNE"
+    name: "Pune"
+  },
+  {
+    id: 5,
+    value: "LUCKNOW",
+    name: "Lucknow"
+  },
+  {
+    id: 6,
+    value: "CHENNAI",
+    name: "Chennai"
   }
 ];
 const fields = [
@@ -66,6 +76,9 @@ const fields = [
     name: "Address"
   }
 ];
+
+/* function component declaration */
+
 const filters = props => {
   const [state, setState] = useState({
     cities: cities,

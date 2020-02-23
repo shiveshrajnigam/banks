@@ -41,12 +41,11 @@ const footer = props => {
   const pageLength =
     props.pageSize < props.totalRecords ? props.pageSize : props.totalRecords;
   return (
-    <div className={classes.Footer}>
-      {/* <input
-      type="number"
-      placeholder="Enter page size (default 10)"
-      onKeyUp={props.adjustPageSize}
-    /> */}
+    <div
+      className={[classes.Footer, pageLength >= 15 ? classes.Shadow : ""].join(
+        " "
+      )}
+    >
       <div style={{ marginRight: "30px" }}>
         Row per pages:{" "}
         <Dropdown
@@ -54,22 +53,32 @@ const footer = props => {
           hideBorders={true}
           clicked={props.adjustPageSize}
           options={pageSize}
+          selected={props.pageSize}
         />
         <span>
           {props.pageNumber * props.pageSize + 1} -{" "}
-          {(props.pageNumber + 1) * pageLength} of {props.totalRecords}
+          {(props.pageNumber + 1) * pageLength < props.totalRecords
+            ? (props.pageNumber + 1) * pageLength
+            : props.totalRecords}{" "}
+          of {props.totalRecords}
         </span>
-        <span
-          className={classes.CursorPointer}
-          onClick={() => props.clicked("prev")}
-        >
-          <img src={Previous} className={classes.Icons} alt="previous" />
+        {/* previous page button */}
+        <span>
+          <img
+            src={Previous}
+            className={[classes.Icons, classes.CursorPointer].join(" ")}
+            alt="previous"
+            onClick={() => props.clicked("prev")}
+          />
         </span>
-        <span
-          className={classes.CursorPointer}
-          onClick={() => props.clicked("next")}
-        >
-          <img src={Next} className={classes.Icons} alt="next" />
+        {/* next page button */}
+        <span>
+          <img
+            src={Next}
+            className={[classes.Icons, classes.CursorPointer].join(" ")}
+            alt="next"
+            onClick={() => props.clicked("next")}
+          />
         </span>
       </div>
     </div>

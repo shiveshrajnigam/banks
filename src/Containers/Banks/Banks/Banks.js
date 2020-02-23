@@ -5,26 +5,62 @@ import Footer from "../../../Components/Table/Footer/Footer";
 import axios from "axios";
 import _ from "lodash";
 import Filters from "../../../Components/Filters/Filters";
-import classes from "./All.css";
+import classes from "./Banks.css";
 import StateContainer from "../../../Components/AppState/AppState";
 import Searchbar from "../../../Components/SearchBar/SearchBar";
-
-// const CancelToken = axios.CancelToken;
-// const source = CancelToken.source();
 
 class All extends Component {
   state = {
     banks: [],
     allBanks: [],
-    selectedCity: "MUMBAI",
+    selectedCity: "BANGALORE",
     selectedField: "",
     searchField: null,
     pageNumber: 0,
-    pageSize: 10,
+    pageSize: 15,
     totalRecords: 0,
     isLoading: true,
     updateFavourite: false,
     searchText: ""
+  };
+
+  componentDidMount() {
+    if (!localStorage.getItem("fav_banks")) {
+      localStorage.setItem("fav_banks", JSON.stringify([]));
+    }
+    this.getBankList();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const didCityUpdate = this.state.selectedCity !== prevState.selectedCity;
+    if (this.state.selectedCity && didCityUpdate) {
+      this.setState({
+        isLoading: true
+      });
+      this.getBankList(this.state.selectedCity);
+    }
+  }
+
+  getBankList = (city = this.state.selectedCity) => {
+    axios
+      .get(`https://vast-shore-74260.herokuapp.com/banks?city=${city}`, {})
+      .then(response => {
+        this.setState({
+          banks: _.take(response.data, this.state.pageSize),
+          allBanks: _.chunk(response.data, this.state.pageSize),
+          totalRecords: response.data.length,
+          pageNumber: 0,
+          selectedCity: city,
+          searchText: ""
+        });
+        document.getElementById("searchbar").value = "";
+      })
+      .catch(error => {
+        console.log("Error " + error);
+      })
+      .finally(() => {
+        this.setState({ isLoading: false });
+      });
   };
 
   onRowClick = bank => {
@@ -66,6 +102,7 @@ class All extends Component {
         searchText: "",
         searchField: event.target.selectedOptions[0].text
       });
+      document.getElementById("searchbar").value = "";
     }
   };
 
@@ -96,57 +133,6 @@ class All extends Component {
         totalRecords: banks.length
       });
     }
-  };
-
-  componentDidMount() {
-    if (!localStorage.getItem("fav_banks")) {
-      localStorage.setItem("fav_banks", JSON.stringify([]));
-    }
-    this.getBankList();
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return true;
-    // return this.state.selectedCity !== nextState.selectedCity;
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    // const didPageSizeUpdate = this.state.pageSize !== prevState.pageSize;
-    const didCityUpdate = this.state.selectedCity !== prevState.selectedCity;
-    if (this.state.selectedCity && didCityUpdate) {
-      this.setState({
-        isLoading: true
-      });
-      this.getBankList(this.state.selectedCity);
-    }
-  }
-
-  // componentWillUnmount() {
-  //   source.cancel("Operation canceled by the user.");
-  // }
-
-  getBankList = (city = this.state.selectedCity) => {
-    axios
-      .get(`https://vast-shore-74260.herokuapp.com/banks?city=${city}`, {
-        // cancelToken: source.token
-      })
-      .then(response => {
-        this.setState({
-          banks: _.take(response.data, this.state.pageSize),
-          allBanks: _.chunk(response.data, this.state.pageSize),
-          totalRecords: response.data.length,
-          pageNumber: 0,
-          selectedCity: city,
-          searchText: ""
-        });
-        document.getElementById("searchbar").value = "";
-      })
-      .catch((error) => {
-        console.log("Error " + error);
-      })
-      .finally(() => {
-        this.setState({ isLoading: false });
-      });
   };
 
   filterWithField = (filteredArray, value = this.state.searchText) => {
@@ -255,63 +241,62 @@ class All extends Component {
     );
 
     return (
-      <div style={{ padding: "30px 30px 0" }}>
-        <Aux>
-          <div style={{ padding: "8px" }}>
-            <div
-              style={{
-                fontWeight: "400",
-                display: "inline-block",
-                width: "30%",
-                fontSize: "1.2em"
-              }}
-            >
-              <i>Banks</i>
+      <Aux>
+        <div style={{ padding: "30px 30px 0" }}>
+          <Aux>
+            <div className={classes.FixHeader}>
+              <div
+                style={{
+                  fontWeight: "400",
+                  display: "inline-block",
+                  width: "30%",
+                  fontSize: "1.2em"
+                }}
+              >
+                <strong>Banks</strong>
+              </div>
+              {filters}
             </div>
-            {filters}
-          </div>
-          {!this.state.isLoading ? (
-            <Aux>
-              <table className={classes.Table}>
-                <thead>
-                  <tr>
-                    <th>Star</th>
-                    <th>Bank</th>
-                    <th>IFSC</th>
-                    <th>Branch</th>
-                    <th>Bank Id</th>
-                    <th>Address</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.state.banks.length ? (
-                    banks
-                  ) : (
-                    <tr style={{ border: "none", width: "100%" }}>
-                      <td style={{ border: "none" }}>
-                        <i>No Results Found.</i>
-                      </td>
+            {!this.state.isLoading ? (
+              <Aux>
+                <table className={classes.Table}>
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Bank</th>
+                      <th>IFSC</th>
+                      <th>Branch</th>
+                      <th>Bank Id</th>
+                      <th>Address</th>
                     </tr>
-                  )}
-                </tbody>
-              </table>
-              {this.state.banks.length ? (
-                <Footer
-                  adjustPageSize={this.pageSizeHandler.bind(this)}
-                  pageSize={this.state.pageSize}
-                  pageNumber={this.state.pageNumber}
-                  totalRecords={this.state.totalRecords}
-                  clicked={this.loadRecords.bind(this)}
-                />
-              ) : null}
-            </Aux>
-          ) : (
-            <StateContainer>
-              <i>Loading bank details...</i>
-            </StateContainer>
-          )}
-        </Aux>
-      </div>
+                  </thead>
+                  <tbody>{this.state.banks.length ? banks : <tr></tr>}</tbody>
+                </table>
+                {!this.state.banks.length ? (
+                  <StateContainer>
+                    No results found for{" "}
+                    <strong>{this.state.searchField}</strong> "
+                    {this.state.searchText}".
+                  </StateContainer>
+                ) : null}
+              </Aux>
+            ) : (
+              <StateContainer>
+                <i>Loading bank details...</i>
+              </StateContainer>
+            )}
+          </Aux>
+        </div>
+        {this.state.banks.length && !this.state.isLoading ? (
+          <Footer
+            adjustPageSize={this.pageSizeHandler.bind(this)}
+            pageSize={this.state.pageSize}
+            pageNumber={this.state.pageNumber}
+            totalRecords={this.state.totalRecords}
+            clicked={this.loadRecords.bind(this)}
+          />
+        ) : null}
+      </Aux>
     );
   }
 }

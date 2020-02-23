@@ -1,6 +1,5 @@
 import React from "react";
 import classes from "./SearchBar.css";
-import Aux from "../../hoc/Aux/Aux";
 import SearchIcon from "../../assets/icons/search.svg";
 
 const searchBar = props => {
@@ -15,10 +14,15 @@ const searchBar = props => {
   };
   const placeholder = props.placeholder ? props.placeholder : "search";
   return (
-    <Aux>
-      <span>
-        <img src={SearchIcon} className={classes.SearchIcon} alt="search" />
-      </span>
+    <div className={classes.SearchbarContainer}>
+      <img
+        src={SearchIcon}
+        className={[
+          classes.SearchIcon,
+          props.disable ? classes.Disable : ""
+        ].join(" ")}
+        alt="search"
+      />
       <input
         type="text"
         onKeyUp={debounceRequest.bind(this)}
@@ -27,7 +31,7 @@ const searchBar = props => {
         placeholder={placeholder}
         disabled={props.disable}
       />
-    </Aux>
+    </div>
   );
 };
 

@@ -1,21 +1,36 @@
 .Sidebar {
   width: 180px;
   background: #273135;
-  color: #fff;
+  color: #89949b;
   display: inline-block;
   height: 100vh;
   float: left;
 }
 
 .Sidebar a {
-  color: #fff;
+  color: #89949b;
   text-decoration: none;
   padding: 15px;
   display: block;
   margin-bottom: 5px;
 }
-
+.Icons {
+  height: 15px;
+  margin-right: 5px;
+  position: relative;
+  top: 2px;
+}
 .ActiveLink {
   background-color: #171d20;
-  border-left: 2px solid #56b596;
+  border-left: 4px solid #56b596;
+}
+.ActiveLink .triangle {
+  float: right;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  left: 15px;
+  position: relative;
+  border-right: 10px solid #fff;
 }

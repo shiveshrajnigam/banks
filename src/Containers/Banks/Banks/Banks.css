@@ -1,0 +1,69 @@
+.FixHeader {
+  padding: 8px;
+  position: sticky;
+  top: 0;
+  background: #fff;
+}
+.Table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  max-height: 30vh;
+  overflow: auto;
+}
+
+.Table thead > tr {
+  cursor: default;
+}
+
+.Table td,
+th {
+  border-bottom: 1px solid #eee;
+  padding: 8px;
+  height: 35px;
+  font-size: 0.9em;
+  text-align: left;
+  min-width: 135px;
+}
+.Table td,
+th:first-child {
+  min-width: 60px;
+}
+.Table tr:nth-child(odd) {
+  background: rgba(242, 242, 242, 0.5);
+}
+.Table th {
+  position: sticky !important;
+  top: 50px;
+  background: white;
+  box-shadow: 0 -1px 0 0px #000 inset;
+}
+
+.Table tr {
+  font-weight: 100;
+  cursor: pointer;
+}
+.Table tbody tr:hover {
+  outline: 1px solid rgba(39, 49, 53, 0.7);
+  border-left: 6px solid rgba(39, 49, 53, 0.7);
+  color: #000;
+}
+
+.Table tr > td:nth-child(5),
+.Table tr > th:nth-child(5) {
+  text-align: center;
+  min-width: 70px;
+}
+
+@media only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 1024px) {
+  /* Force table to not be like tables anymore */
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+}

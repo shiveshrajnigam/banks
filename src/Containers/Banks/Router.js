@@ -2,17 +2,11 @@ import React, { Component } from "react";
 import Aux from "../../hoc/Aux/Aux";
 import classes from "../../hoc/Layout/Layout.css";
 import { Route, Switch, Redirect } from "react-router-dom";
-import AllBanks from "./All/All";
-import BankDetails from "../Banks/BankDetails/BankDetails";
+import AllBanks from "./Banks/Banks";
+import BankDetails from "./BankDetails/BankDetails";
 import Favourites from "./Favourites/Favourites";
 
 class Banks extends Component {
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   console.log(this.state, nextState, nextProps);
-  //   return true;
-  //   // return this.state.selectedCity !== nextState.selectedCity;
-  // }
-
   render() {
     return (
       <Aux>

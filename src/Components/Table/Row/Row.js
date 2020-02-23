@@ -10,10 +10,11 @@ const row = props => {
   return (
     <Aux>
       <tr onClick={props.clicked}>
-        <td onClick={props.updateFavourite} style={{ textAlign: "center" }}>
+        <td style={{ textAlign: "center" }}>
           <img
             src={imageSrc}
             alt="fav_img"
+            onClick={props.updateFavourite}
             style={{ height: "20px", cursor: "pointer" }}
           />
         </td>

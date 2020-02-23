@@ -3,9 +3,11 @@ import Aux from "../../../hoc/Aux/Aux";
 import Bank from "../../../Components/Table/Row/Row";
 import Footer from "../../../Components/Table/Footer/Footer";
 import _ from "lodash";
-import classes from "../All/All.css";
+import classes from "../Banks/Banks.css";
 import Filters from "../../../Components/Filters/Filters";
 import Searchbar from "../../../Components/SearchBar/SearchBar";
+import StateContainer from "../../../Components/AppState/AppState";
+
 class Favourites extends Component {
   state = {
     banks: [],
@@ -122,7 +124,9 @@ class Favourites extends Component {
     }
     this.setState({
       updateFavourite: true,
-      banks: favBanks
+      banks: favBanks,
+      allBanks: _.chunk(favBanks, this.state.pageSize),
+      totalRecords: favBanks.length
     });
     localStorage.setItem("fav_banks", JSON.stringify(favBanks));
     event.stopPropagation();
@@ -215,7 +219,7 @@ class Favourites extends Component {
     return (
       <Aux>
         <div style={{ padding: "30px" }}>
-          <div style={{ padding: "8px" }}>
+          <div className={classes.FixHeader}>
             <div
               style={{
                 fontWeight: "400",
@@ -224,7 +228,7 @@ class Favourites extends Component {
                 fontSize: "1.2em"
               }}
             >
-              <i>Favourite Banks</i>
+              <strong>Favourite Banks</strong>
             </div>
             {filters}
           </div>
@@ -239,28 +243,21 @@ class Favourites extends Component {
                 <th>Address</th>
               </tr>
             </thead>
-            <tbody>
-              {this.state.banks.length ? (
-                banks
-              ) : (
-                <tr style={{ border: "none", width: "100%" }}>
-                  <td style={{ border: "none" }}>
-                    <i>No banks added.</i>
-                  </td>
-                </tr>
-              )}
-            </tbody>
+            <tbody>{this.state.banks.length ? banks : null}</tbody>
           </table>
-          {this.state.banks.length ? (
-            <Footer
-              adjustPageSize={this.pageSizeHandler.bind(this)}
-              pageSize={this.state.pageSize}
-              pageNumber={this.state.pageNumber}
-              totalRecords={this.state.totalRecords}
-              clicked={this.loadRecords.bind(this)}
-            />
+          {!this.state.banks.length ? (
+            <StateContainer>No banks found!</StateContainer>
           ) : null}
         </div>
+        {this.state.banks.length ? (
+          <Footer
+            adjustPageSize={this.pageSizeHandler.bind(this)}
+            pageSize={this.state.pageSize}
+            pageNumber={this.state.pageNumber}
+            totalRecords={this.state.totalRecords}
+            clicked={this.loadRecords.bind(this)}
+          />
+        ) : null}
       </Aux>
     );
   }

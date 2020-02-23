@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./BankDetails.css";
 import { useLocation, useHistory } from "react-router-dom";
 import Star from "../../../assets/icons/star.svg";
@@ -14,7 +14,23 @@ const bankDetails = props => {
     history.goBack();
   };
 
-  const imageSrc = location.state.isFavourite ? StarFilled : Star;
+  const [state, setState] = useState({
+    imageSrc: location.state.isFavourite ? StarFilled : Star
+  });
+
+  const updateFavourite = (event, bankDetails = bank) => {
+    let favBanks = JSON.parse(localStorage.getItem("fav_banks"));
+    let index = favBanks.findIndex(bank => bank.ifsc === bankDetails.ifsc);
+    if (index > -1) {
+      favBanks.splice(index, 1);
+      setState({ imageSrc: Star });
+    } else {
+      favBanks.push(bankDetails);
+      setState({ imageSrc: StarFilled });
+    }
+    localStorage.setItem("fav_banks", JSON.stringify(favBanks));
+    event.stopPropagation();
+  };
 
   return (
     <div className={classes.BankDetails}>
@@ -23,7 +39,12 @@ const bankDetails = props => {
         Go Back
       </p>
       <div className={classes.ImageContainer}>
-        <img src={imageSrc} alt="favourite" />
+        <img
+          src={state.imageSrc}
+          alt="favourite"
+          className={classes.CursorPointer}
+          onClick={updateFavourite.bind(this)}
+        />
       </div>
       <div className={classes.DetailsContainer}>
         <p className={classes.Title}>
