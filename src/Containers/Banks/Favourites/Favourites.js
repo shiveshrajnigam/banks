@@ -16,7 +16,7 @@ class Favourites extends Component {
     selectedField: "",
     searchField: null,
     pageNumber: 0,
-    pageSize: 10,
+    pageSize: 15,
     totalRecords: 0,
     isLoading: false,
     searchText: ""
@@ -25,7 +25,7 @@ class Favourites extends Component {
     if (localStorage.getItem("fav_banks")) {
       const banks = JSON.parse(localStorage.getItem("fav_banks"));
       this.setState({
-        banks: banks,
+        banks: _.take(banks, this.state.pageSize),
         allBanks: _.chunk(banks, this.state.pageSize),
         totalRecords: banks.length,
         pageNumber: 0,
